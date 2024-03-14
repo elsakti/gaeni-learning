@@ -49,7 +49,11 @@
                                     
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('admin_edit_users', ['id' => $item->id]) }}">EDIT</a>
+                                        @if ($item->hasRole('student'))
                                         <a class="btn btn-secondary" href="{{ route('admin_assignTrainer_users', ['id' => $item->id]) }}">Trainer</a>
+                                        @else
+                                        
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

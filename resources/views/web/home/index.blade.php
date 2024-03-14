@@ -110,7 +110,7 @@
         </div>
     </div>
     <div class="herobannerarea__icon__2">
-            <img class="herobanner__common__img herobanner__img__1" src="{{ asset("assets/img/herobanner/herobanner__slider__8.png") }}" alt="photo" width="20%">
+            <img class="herobanner__common__img herobanner__img__1" src="{{ asset("assets/img/herobanner/herobanner__slider__8.png") }}" alt="photo" width="20%" style="opacity: 100%">
             {{-- <img class="herobanner__common__img herobanner__img__2" src="{{ asset("assets/img/herobanner/herobanner__2.png") }}" alt="photo"> --}}
             {{-- <img class="herobanner__common__img herobanner__img__3" src="{{ asset("assets/img/herobanner/herobanner__3.png") }}" alt="photo"> --}}
             {{-- <img class="herobanner__common__img herobanner__img__4" src="{{ asset("assets/img/herobanner/herobanner__4.png") }}" alt="photo"> --}}
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Data Science</a></h3>
+                        <h3>Data Science</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Metaverse</a></h3>
+                        <h3>Metaverse</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Front End & Back End</a></h3>
+                        <h3>Front End & Back End</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -214,7 +214,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Kuliner/Pariwisata</a></h3>
+                        <h3>Kuliner/Pariwisata</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -239,7 +239,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Agrotek</a></h3>
+                        <h3>Agrotek</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -264,7 +264,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Desain Packaging</a></h3>
+                        <h3>Desain Packaging</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -289,7 +289,7 @@
                         </div>
                     </div>
                     <div class="service__content">
-                        <h3><a href="course-details.html">Aspek Hukum - HKI</a></h3>
+                        <h3>Aspek Hukum - HKI</a></h3>
                         <p>Online Course</p>
                     </div>
                     <div class="service__small__img">
@@ -376,7 +376,7 @@
 
                                 </div>
                                 <div class="service__content service__content__2">
-                                    <h3><a href="course-details.html">Data Science</a></h3>
+                                    <h3>Data Science</h3>
                                     <p> combines mathematics, statistics, programming, analytics, artificial intelligence, and machine learning</p>
                                 </div>
                             </div>
@@ -386,7 +386,7 @@
                                     <img src={{ asset("assets/img/service/service__7.png") }} alt="p2">
                                 </div>
                                 <div class="service__content service__content__2">
-                                    <h3><a href="course-details.html">Metaverse</a></h3>
+                                    <h3>Metaverse</h3>
                                     <p>digital spaces for socializing, learning, playing, and more. It is the next evolution in social connection</p>
                                 </div>
                             </div>
@@ -399,7 +399,7 @@
 
                                 </div>
                                 <div class="service__content service__content__2">
-                                    <h3><a href="course-details.html">Web Programming</a></h3>
+                                    <h3>Web Programming</h3>
                                     <p>developing web applications and websites that can be accessed via the internet.</p>
                                 </div>
                             </div>
@@ -410,7 +410,7 @@
 
                                 </div>
                                 <div class="service__content service__content__2">
-                                    <h3><a href="course-details.html">Technopreneur</a></h3>
+                                    <h3>Technopreneur</h3>
                                     <p>entrepreneur who is involved with high-tech business.</p>
                                 </div>
                             </div>

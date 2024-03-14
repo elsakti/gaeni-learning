@@ -119,7 +119,6 @@
                     </div>
                     {{-- end description area --}}
 
-
                     {{-- form area --}}
                     <Label for="gform">Google Form: (Optional)</Label>
                     <input type="text" class="form-control" type="url" name="gform" id="gform" >
@@ -127,7 +126,6 @@
                         <span class="error">{{ $errors->first('gform') }}</span>
                     @endif
                     {{-- end form area --}}
-
 
                     <div class="login__button" style="text-align: center">
                         <button type="submit" id="submit" class="default__button">SUBMIT</button>
