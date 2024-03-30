@@ -47,7 +47,7 @@
                                 Course Start (Date) : <span>{{ $start_at }}</span>
                             </li>
                             <li>
-                                Course End (Date) : <span>{{ $start_at }}</span>
+                                Course End (Date) : <span>{{ $end_at }}</span>
                             </li>
                         </ul>
                         <ul>

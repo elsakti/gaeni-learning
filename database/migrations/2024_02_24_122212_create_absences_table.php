@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->foreignUuid('course_id')->references('id')->on('courses');
             $table->dateTime('open_time');
             $table->dateTime('closed_time');

@@ -57,8 +57,7 @@ class AuthController extends Controller
             'institute' => 'required',
             'phone' => 'required|unique:users',
             'email' => 'required|unique:users',
-            'password' => 'required|min:8|confirmed',
-            'password_confirmation' => 'required'
+            'password' => 'required|min:8|confirmed'
         ]);
         if ($request->password_confirmation != $request->password) {
             return back()
