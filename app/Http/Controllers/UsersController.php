@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\User;
+use App\Models\UserCourse;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -67,25 +68,40 @@ class UsersController extends Controller
         return redirect()->route('admin_users');
     }
     
-    public function deleteAll(Request $request) {
-        $ids = $request->ids;
-        User::whereIn('id',$ids)->delete();
+    public function destroy(User $user) {
+        @dd($user);
+        $user->delete();
         toast('Account Has Been Deleted!','success');
-        return response()->json(['success','Selected Users Deleted']);
+        return redirect()->route('admin_users');
     }
 
-    public function addCourseToAll(Request $request) {
-        $ids = $request->ids;
-        $course_id = $request->course_id;
+    public function addCourse(Request $request) {
+        // Mengubah user_ids dari string ke array
+        $user_ids = explode(',', $request->user_ids);
+        $course_ids = $request->course_id;
     
-        $users = User::whereIn('id', $ids)->get();
-        foreach ($users as $user) {
-            $user->courses()->attach($course_id);
+        // Memastikan user_ids dan course_id tidak kosong
+        if (!empty($user_ids) && !empty($course_ids)) {    
+            foreach ($user_ids as $user_id) {
+                foreach ($course_ids as $course_id) {
+                    // Membuat entri baru di tabel UserCourse
+                    UserCourse::create([
+                        'user_id' => $user_id,
+                        'course_id' => $course_id
+                    ]);
+                }
+            }
+            toast('Course Has Been Added to Selected Users!','success');
+            return redirect()->route('admin_users');
+        } else {
+            toast('Invalid User or Course Selection','error');
+            return redirect()->back();
         }
-    
-        toast('Course Has Been Added to Selected Users!','success');
-        return response()->json(['success','Course added to selected users']);
     }
+    
+    
+    
+    
 
     public function assignTrainer($id) {
         $user = User::find($id);

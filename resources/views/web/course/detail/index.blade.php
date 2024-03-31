@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="course__details__paragraph" data-aos="fade-up">
-                        <h3>Registrartion Form: </h3>
+                        <h3>Registration Form: </h3>
                         <a href="{{ $course->gform }}" target="_blank">{{ $course->gform }}</a>
                     </div>
 

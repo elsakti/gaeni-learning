@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('course_id')->references('id')->on('courses');
             $table->string('reedem');
             $table->boolean('status')->default(true);

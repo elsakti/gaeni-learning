@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users');
-            $table->foreignId('task_id')->constrained('tasks');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('task_id')->constrained('tasks')->onDelete('cascade');
             $table->string('file');
             $table->string('status');
             $table->integer('grade')->nullable();

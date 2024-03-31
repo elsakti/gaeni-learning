@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users');
-            $table->foreignid('absence_id')->constrained('absences');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignid('absence_id')->constrained('absences')->onDelete('cascade');
             $table->timestamps();
         });
     }
