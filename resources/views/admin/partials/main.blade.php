@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/iconF.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/mainicon.png') }}">
 
 
     <!-- Place favicon.ico in the root directory -->
@@ -36,6 +36,11 @@
 
 
 <body class="body__wrapper">
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
    
 
     <main class="main_wrapper overflow-hidden">

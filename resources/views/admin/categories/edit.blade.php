@@ -5,8 +5,9 @@
       <div class="login__heading">
           <h5 class="login__title">Edit {{$category->title}}</h5>
       </div>
-      <form action="{{ route('admin_update_categories', ['id' => $category->id]) }}" method="POST">
+      <form action="{{ route('categories.update', $category->id) }}" method="POST">
           @csrf
+          @method('PUT')
           <div class="login__form">
               <label class="form__label">Title</label>
               <input class="common__login__input  @error('error') is-invalid @enderror" type="text" placeholder="Title" 

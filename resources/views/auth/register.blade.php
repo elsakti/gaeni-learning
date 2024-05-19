@@ -1,6 +1,15 @@
 @extends('auth.partials.main')
 
 @section('content')
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="loginarea sp_top_100 sp_bottom_100">
     <div class="container">
         <div class="row">

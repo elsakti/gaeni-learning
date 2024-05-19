@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="login__form">
                                     <label class="form__label">Password</label>
-                                    <input class="common__login__input" type="password" placeholder="Password" name="password" id="email"  required>
+                                    <input class="common__login__input" type="password" placeholder="Password" name="password" id="password"  required>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

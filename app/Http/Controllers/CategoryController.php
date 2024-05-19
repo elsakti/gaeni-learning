@@ -3,75 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         return view('admin.categories.index', [
-            'title' => 'Categories List',
+            'title' => 'All Categories',
             'categories' => Category::all()
         ]);
     }
 
-    public function edit($id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        return view('admin.categories.edit', [
-            'title' => 'Edit Categories',
-            'category' => Category::findOrFail($id)
-        ]);
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:categories,title',
             'description' => 'nullable',
         ]);
 
-        if (Category::where('title', $validated['title'])->exists()) {
-            toast('Failed, Title Already Exist!', 'error');
-            return back();
-        }
-
         Category::create($validated);
         toast('New Category Added!', 'success');
-        return back();
+        return redirect()->route('categories.index');
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $category = Category::find($id);
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Category $category)
+    {
+        return view('admin.categories.edit',[
+            'title' => $category->name . 'Edit',
+            'category' => $category
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request,Category $category)
+    {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:categories,title,' . $category->id,
             'description' => 'nullable'
         ]);
-        if ($request->title == $category->title) {
-            $category->update([
-                'title' => $category->title,
-                'description' => $request->description
-            ]);
-        } else {
-            $category->update([
-                'title' => $request->title,
-                'description' => $request->description
-            ]);
-        }
+
+        $category->update([
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
+
         toast('Selected Category Updated!', 'success');
-        return redirect()->route('admin_categories');
+        return redirect()->route('categories.index');
     }
 
-    public function deleteAll(Request $request)
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Category $category)
     {
-        $ids = $request->ids;
-        $course = Course::whereIn('category_id', $ids);
-        $course->update([
-            'category_id' => 'none'
-        ]);
-        Category::whereIn('id', $ids)->delete();
-        return response()->json(['success', 'Selected Categories Deleted']);
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

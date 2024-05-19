@@ -1,3 +1,8 @@
+@php
+    $courses = \App\Models\Course::with('users')->get();
+@endphp
+
+
 <div class="col-xl-3 col-lg-3 col-md-12">
     <div class="dashboard__inner sticky-top">
         <div class="dashboard__nav__title">
@@ -17,7 +22,7 @@
                         Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ route('admin_users') }}">
+                    <a href="{{ route('users.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -40,7 +45,7 @@
                         All Courses</a>
                 </li>
                 <li>
-                    <a href="{{ route('admin_categories') }}">
+                    <a href="{{ route('categories.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -49,6 +54,24 @@
                         </svg>
                         All Categories</a>
                 </li>
+
+                <div class="dashboard__nav__title mt-40">
+                    <h6>Courses With Users</h6>
+                </div>
+
+                @foreach ($courses as $course)
+                <li>
+                    <a href="{{ route('admin_users_course', $course->id) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        {{ $course->name }} - {{ $course->users->count() }} Users</a>
+                </li>
+                @endforeach
                 {{-- <li>
                     <a href="admin-profile.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

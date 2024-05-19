@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -150,6 +151,38 @@ class CourseController extends Controller
         toast($course->name . ' Course Has Been Deleted!', 'success');
         return redirect()->route('admin_courses');
     }
+
+    public function users($id)
+    {
+        return view('admin.courses.users', [
+            'title' => 'Users',
+            'course' => Course::findOrFail($id),
+            'users' => Course::findOrFail($id)->users
+        ]);
+    }
+
+    public function assignCourseToUsers(Request $request)
+    {
+        $userIds = $request->input('user_ids');
+        $courseId = $request->input('course_id');
+
+        $course = Course::find($courseId);
+
+        if ($course) {
+            // Assuming there is a many-to-many relationship set up in the Course model
+            $course->users()->sync($userIds);
+        }
+
+        return redirect()->back()->with('success', 'Course assigned to users successfully!');
+    }
+    public function removeUser($courseId, $userId)
+{
+    $course = Course::findOrFail($courseId);
+    $user = User::findOrFail($userId);
+    $course->users()->detach($userId);
+
+    return redirect()->back()->with('success', 'User removed from course successfully.');
+}
 
     
 

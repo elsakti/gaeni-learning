@@ -1,12 +1,22 @@
 @extends('admin.partials.main')
 
 @section('content')
+    
 <div class="col-xl-9 col-lg-9 col-md-12">
     <div class="loginarea__wraper">
         <div class="login__heading">
             <h5 class="login__title">Create New User</h5>
         </div>
-        <form action="{{ route('admin_store_users') }}" method="POST" enctype="multipart/form-data">
+        @if($errors->any())
+        <div class="alert alert-danger">
+           <ul>
+               @foreach ($errors->all() as $error)
+                   <li>{{ $error }}</li>
+               @endforeach
+           </ul>
+        </div>
+        @endif
+        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="login__form">
                 <label class="form__label">Name</label>

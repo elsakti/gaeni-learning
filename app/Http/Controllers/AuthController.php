@@ -87,8 +87,8 @@ class AuthController extends Controller
         // dd($user);
         if (Auth::attempt(['password' => $request->password, 'email' => $user->email])) {
             $user->assignRole('student');
-            $request->session()->regenerate();
             toast('Account Has Been Registered!, Welcome' . $request->name, 'success');
+            $request->session()->regenerate();
             return redirect()->route('login_page')->with('email', $request->email);
         }
     }

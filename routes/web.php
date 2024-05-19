@@ -26,21 +26,13 @@ Route::group(['middleware' => ['role:admin']], function () {
 
     Route::get('/admin/dashboard', [DashboardController::class, 'admin'])->name('admin_dashboard');
 
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin_categories');
-    Route::get('/admin/categories/{id}/edit', [CategoryController::class, 'edit'])->name('admin_edit_categories');
-    Route::post('/admin/categories/{id}/updating', [CategoryController::class, 'update'])->name('admin_update_categories');
-    Route::post('/admin/categories/loading', [CategoryController::class, 'store'])->name('admin_add_category');
-    Route::delete('/admin/categories/selected', [CategoryController::class, 'deleteAll'])->name('admin_delete_selected_categories');
-
-    Route::get('/admin/users', [UsersController::class, 'index'])->name('admin_users');
-    Route::get('/admin/users/{id}/assign/trainer', [UsersController::class, 'assignTrainer'])->name('admin_assignTrainer_users');
-    Route::get('/admin/users/create', [UsersController::class, 'create'])->name('admin_create_users');
-    Route::get('/admin/users/{id}/edit', [UsersController::class, 'edit'])->name('admin_edit_users');
-    Route::post('/admin/users/loading', [UsersController::class, 'store'])->name('admin_store_users');
-    Route::post('/admin/users/{id}/updating', [UsersController::class, 'update'])->name('admin_update_users');
-    Route::delete('/admin/users/{id}/delete', [UsersController::class, 'destroy'])->name('admin_delete_users');
-    Route::post('/admin/users/addcourse', [UsersController::class, 'addCourse'])->name('admin_addcourse_selected_users');
-
+    Route::resource('/admin/dashboard/categories', CategoryController::class);
+    Route::resource('/admin/dashboard/users', UsersController::class);
+    
+    Route::get('/admin/dashboard/courses/{id}/users', [CourseController::class, 'users'])->name('admin_users_course');
+    Route::post('/assign-course-to-users', [CourseController::class, 'assignCourseToUsers'])->name('assign_course_to_users');
+    Route::delete('/courses/{course}/users/{user}/remove', [CourseController::class, 'removeUser'])->name('courses.removeUser');
+    
     Route::get('/admin/courses', [CourseController::class, 'index'])->name('admin_courses');
     Route::get('/admin/courses/create', [CourseController::class, 'create'])->name('admin_create_courses');
     Route::get('/admin/courses/{id}edit', [CourseController::class, 'edit'])->name('admin_edit_courses');

@@ -6,8 +6,9 @@
         <div class="login__heading">
             <h5 class="login__title">Update {{ $user->name }} Data</h5>
         </div>
-        <form action="{{ route('admin_update_users', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="login__form">
                 <label class="form__label">Name</label>
                 <input class="common__login__input  @error('error') is-invalid @enderror" type="text" placeholder="Name" 
