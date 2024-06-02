@@ -86,7 +86,6 @@
                 </div>
             </div>
             <div class="herobannerarea__icon__2">
-                <img class="herobanner__common__img herobanner__img__1" src="{{ asset("assets/img/herobanner/herobanner__1.png")}}" alt="photo">
                 <img class="herobanner__common__img herobanner__img__2" src="{{ asset("assets/img/herobanner/herobanner__2.png")}}" alt="photo">
                 <img class="herobanner__common__img herobanner__img__3" src="{{ asset("assets/img/herobanner/herobanner__3.png")}}" alt="photo">
                 <img class="herobanner__common__img herobanner__img__4" src="{{ asset("assets/img/herobanner/herobanner__4.png")}}" alt="photo">
@@ -197,7 +196,7 @@
                         <div class="single__blog__wraper">
                             <div class="single__blog__img">
                                 <a href="{{ route('detail_course', ['name' => $item->name]) }}">
-                                    <img src="{{ asset("storage/image/$item->image") }}" alt="{{ $item->name }}">
+                                    <img src="{{ asset("public/storage/image/$item->image") }}" alt="{{ $item->name }}">
                                 </a>
                             </div>
                             <div class="single__blog__content">

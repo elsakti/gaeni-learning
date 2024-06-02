@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absence;
+use App\Models\Attendance;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\User;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
@@ -152,9 +155,18 @@ class CourseController extends Controller
         return redirect()->route('admin_courses');
     }
 
-    public function users($id)
+    public function admin_users_course($id)
     {
         return view('admin.courses.users', [
+            'title' => 'Users',
+            'course' => Course::findOrFail($id),
+            'users' => Course::findOrFail($id)->users
+        ]);
+    }
+
+    public function trainer_users_course($id)
+    {
+        return view('trainer.course.users', [
             'title' => 'Users',
             'course' => Course::findOrFail($id),
             'users' => Course::findOrFail($id)->users
@@ -175,15 +187,80 @@ class CourseController extends Controller
 
         return redirect()->back()->with('success', 'Course assigned to users successfully!');
     }
+
     public function removeUser($courseId, $userId)
-{
-    $course = Course::findOrFail($courseId);
-    $user = User::findOrFail($userId);
-    $course->users()->detach($userId);
+    {
+        $course = Course::findOrFail($courseId);
+        $user = User::findOrFail($userId);
+        $course->users()->detach($userId);
 
-    return redirect()->back()->with('success', 'User removed from course successfully.');
-}
+        return redirect()->back()->with('success', 'User removed from course successfully.');
+    }
 
+    public function admin_detail_course($id)
+    {
+        $course = Course::find($id);
+        return view('admin.courses.show',[
+            'title' => $course->name . ' DETAIL',
+            'course' => $course
+        ]);
+    }
+
+    public function trainer_detail_course($id)
+    {
+        $course = Course::find($id);
+        return view('trainer.course.show',[
+            'title' => $course->name . ' DETAIL',
+            'course' => $course
+        ]);
+    }
+
+        public function student_detail_course($id)
+    {
+        $course = Course::find($id);
+        $absence = $course->absences()->latest()->first();
+
+        $data = [
+            'title' => $course->name . ' DETAIL',
+            'course' => $course,
+        ];
+
+        if ($absence) {
+            $data['absence'] = $absence;
+            $data['attended'] = Attendance::where('user_id', Auth::id())->where('absence_id', $absence->id)->exists();
+        } else {
+            $data['absence'] = $absence;
+        }
+
+        return view('student.course.show', $data);
+    }
+    
+        public function hasAttended($absenceId)
+    {
+        return Attendance::where('user_id', Auth::id())
+            ->where('absence_id', $absenceId)
+            ->exists();
+    }
+
+    public function add_attendance(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'course_id' => 'required|exists:courses,id',
+            'time_attend' => 'required',
+            'notes' => 'nullable',
+            'type' => 'required'
+        ]);
+
+        $absence = new Attendance();
+        $absence->user_id = $request->user_id;
+        $absence->course_id = $request->course_id;
+        $absence->time_attend = $request->time_attend;
+        $absence->notes = $request->notes;
+        $absence->type = $request->type;
+        $absence->save();
+        return redirect()->back();
+    }
     
 
 }

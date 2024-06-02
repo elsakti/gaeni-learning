@@ -110,5 +110,20 @@ class UsersController extends Controller
         return redirect()->route('users.index');
     }
 
+    public function assignTrainer($id) {
+        $user = User::find($id);
+    
+        if ($user && $user->hasRole('student')) {
+            $user->removeRole('student');
+            $user->assignRole('trainer');
+    
+            toast('User has been assigned as trainer', 'success');
+        } else {
+            toast('Invalid user or user is not a student', 'error');
+        }
+    
+        return redirect()->route('users.index');
+    }
+
 
 }

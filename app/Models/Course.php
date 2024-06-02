@@ -32,7 +32,13 @@ class Course extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'users_courses');
+        return $this->belongsToMany(User::class, 'users_courses', 'course_id', 'user_id')
+            ->withPivot('graduation');
+    }
+
+    public function absences()
+    {
+        return $this->hasMany(Absence::class);
     }
 
 }

@@ -15,7 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignid('absence_id')->constrained('absences')->onDelete('cascade');
+            $table->time('time_attend');
+            $table->text('notes')->nullable;
+            $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
+            $table->unique(['user_id', 'absence_id']);
         });
     }
 

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->dateTime('open_time');
-            $table->dateTime('closed_time');
+            $table->time('open_time');
+            $table->time('closed_time')->nullable();
+            $table->date('date');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

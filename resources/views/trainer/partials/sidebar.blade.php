@@ -1,7 +1,9 @@
+
+
 <div class="col-xl-3 col-lg-3 col-md-12">
     <div class="dashboard__inner sticky-top">
         <div class="dashboard__nav__title">
-            <h6>Welcome, Trainer(Beta)</h6>
+            <h6>Welcome, {{ Auth::user()->name }} </h6>
         </div>
         <div class="dashboard__nav">
             <ul>
@@ -25,32 +27,31 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        My Profile</a>
+                        My Profile - Coming Soon</a>
                 </li>
-                <li>
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-star">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                            </polygon>
-                        </svg>
-                        Course Absences</a>
-                </li>
-                <li>
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-bookmark">
-                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                        Course Tasks</a>
-                </li>       
             </ul>
         </div>
+        <div class="dashboard__nav__title mt-40">
+            <h6>Course Data</h6>
+        </div>
+        <div class="dashboard__nav">
+            <ul>
+                @foreach (Auth::user()->courses as $course)
+                <li>
+                    <a href="{{ route('trainer_detail_courses', $course->id) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        {{ $course->name }} - {{ $course->users ? $course->users->count() : '0' }} Students</a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        
         <div class="dashboard__nav__title mt-40">
             <h6>Menu</h6>
         </div>
