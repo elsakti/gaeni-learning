@@ -9,7 +9,7 @@
           <form action="{{ route('trainer_add_absence', $course->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-              <label for="course_id" class="col-form-label">Course Id</label>
+              <label for="course_id" class="col-form-label">Course Name</label>
               <input type="hidden" class="form-control" name="course_id" value="{{ $course->id }}">
               <input type="text" class="form-control" value="{{ $course->name }}" disabled>
             </div>

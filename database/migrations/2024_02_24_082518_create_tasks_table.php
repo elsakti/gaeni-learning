@@ -16,7 +16,10 @@ return new class extends Migration
             $table->foreignUuid('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->string('title');
             $table->longText('description');
-            $table->dateTime('deadline');
+            $table->date('open_date');
+            $table->date('closed_date');
+            $table->enum('status', ['pending', 'opened', 'closed']);
+            $table->enum('type', ['link', 'pdf', 'zip']);
             $table->timestamps();
         });
     }

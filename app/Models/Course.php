@@ -41,4 +41,14 @@ class Course extends Model
         return $this->hasMany(Absence::class);
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function submission()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
 }

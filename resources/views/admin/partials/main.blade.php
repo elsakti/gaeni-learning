@@ -29,20 +29,27 @@
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
         if (localStorage.getItem("theme-color") === "dark") {
           document.documentElement.classList.remove("is_dark");
-        } 
+        }
     </script>
 
 </head>
 
 
 <body class="body__wrapper">
-  @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-   
-
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <main class="main_wrapper overflow-hidden">
       <div class="dashboardarea sp_bottom_100">
         <div class="dashboard">
@@ -55,11 +62,11 @@
         </div>
       </div>
     </main>
-    
-    
-    
-    
-    
+
+
+
+
+
     <!-- JS here -->
     @yield('modal')
     @yield('scripts')
@@ -86,10 +93,10 @@
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
         if (localStorage.getItem("theme-color") === "dark" || (!("theme-color" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
           document.getElementById("light--to-dark-button")?.classList.add("dark--mode");
-        } 
+        }
         if (localStorage.getItem("theme-color") === "light") {
           document.getElementById("light--to-dark-button")?.classList.remove("dark--mode");
-        } 
+        }
       </script>
 
 

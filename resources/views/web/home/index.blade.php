@@ -11,7 +11,7 @@
     <!-- pre loader area end -->
 
     <!-- topbar area start -->
-        <div class="topbararea" style="background-color: black">    
+        <div class="topbararea" style="background-color: black">
             <div class="container">
             <div class="row">
                 <div class="col-xl-4 col-lg-6">
@@ -93,7 +93,7 @@
             </div>
         </div>
     <!-- herobannerarea__section__end-->
-    
+
     <!-- brand__section__start -->
         <div class="brandarea__2">
             <div class="container">
@@ -159,7 +159,7 @@
                             </div>
                             <div class="eventarea__content__wraper">
                                 <div class="single__event__heading">
-                                    <h4>COURSE GOLDEN TICKET BATCH 5 | PENS - SEAQIS - GEMA FOUNDATION</h4>
+                                    <h4>INFORMASI COURSE GOLDEN TICKET BATCH 5 | PENS - SEAQIS - GEMA FOUNDATION</h4>
                                 </div>
                                 <div class="single__event__button">
                                     <a href="{{ asset('assets/pdf/gt-b5-information.pdf') }}" target="_blank">Read More <i class="icofont-simple-right"></i></a>
@@ -170,6 +170,30 @@
                     </div>
                 </div>
             </div>
+
+            <div class="tab-content tab__content__wrapper" id="myTabContent">
+                <div class="tab-pane fade active show" id="projects__two" role="tabpanel"
+                    aria-labelledby="projects__two">
+                    <div class="social__wrapper">
+                        <div class="single__event__wraper" data-aos="fade-up">
+                            <div class="eventarea__img">
+                                <img src="{{ asset("assets/img/service/service__6.png") }}" alt="info">
+                            </div>
+                            <div class="eventarea__content__wraper">
+                                <div class="single__event__heading">
+                                    <h4>JADWAL COURSE GOLDEN TICKET BATCH 5 | PENS - SEAQIS - GEMA FOUNDATION</h4>
+                                </div>
+                                <div class="single__event__button">
+                                    <a href="{{ asset('assets/pdf/jadwalGT.pdf') }}" target="_blank">Read More <i class="icofont-simple-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
 
 
         </div>
@@ -318,7 +342,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>                
+                    </div>
                 </div>
 
             </div>

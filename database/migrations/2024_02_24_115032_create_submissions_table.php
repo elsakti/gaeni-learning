@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('task_id')->constrained('tasks')->onDelete('cascade');
             $table->string('file');
-            $table->string('status');
-            $table->integer('grade')->nullable();
+            $table->dateTime('time_submit');
+            $table->enum('status', ['on_time', 'late']);
+            $table->enum('grade', ['A', 'AB', 'B', 'C', 'D', 'E'])->nullable();
             $table->text('feedback')->nullable();
             $table->timestamps();
         });

@@ -46,12 +46,12 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        {{ $course->name }} - {{ $course->users ? $course->users->count() : '0' }} Students</a>
+                        {{ $course->name }} - {{ $course->users ? $course->users->count() : '0' }} Users</a>
                 </li>
                 @endforeach
             </ul>
         </div>
-        
+
         <div class="dashboard__nav__title mt-40">
             <h6>Menu</h6>
         </div>

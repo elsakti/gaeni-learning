@@ -17,7 +17,7 @@ class UsersController extends Controller
         return view('admin.users.index', [
             'title' => 'All Users',
             'users' => User::all(),
-            'courses' => Course::all()
+            'courses' => Course::all(),
         ]);
     }
 
@@ -72,9 +72,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $user)
     {
         return view('admin.users.edit', [
@@ -83,9 +80,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
@@ -112,16 +106,16 @@ class UsersController extends Controller
 
     public function assignTrainer($id) {
         $user = User::find($id);
-    
+
         if ($user && $user->hasRole('student')) {
             $user->removeRole('student');
             $user->assignRole('trainer');
-    
+
             toast('User has been assigned as trainer', 'success');
         } else {
             toast('Invalid user or user is not a student', 'error');
         }
-    
+
         return redirect()->route('users.index');
     }
 

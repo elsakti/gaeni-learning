@@ -6,6 +6,8 @@ use App\Models\Absence;
 use App\Models\Attendance;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Submission;
+use App\Models\Task;
 use App\Models\User;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
@@ -181,7 +183,6 @@ class CourseController extends Controller
         $course = Course::find($courseId);
 
         if ($course) {
-            // Assuming there is a many-to-many relationship set up in the Course model
             $course->users()->sync($userIds);
         }
 
@@ -215,27 +216,46 @@ class CourseController extends Controller
         ]);
     }
 
-        public function student_detail_course($id)
+    public function student_detail_course($id)
     {
         $course = Course::find($id);
+
         $absence = $course->absences()->latest()->first();
+
+        $attendances = Auth::user()->attendances()
+            ->whereHas('absence', function ($query) use ($course) {
+                $query->where('course_id', $course->id);
+            })
+            ->latest()->limit(3)->get();
+
+        $tasks = Task::with('submissions')->where('course_id', $id)->get();
 
         $data = [
             'title' => $course->name . ' DETAIL',
             'course' => $course,
+            'tasks' => $tasks,
         ];
 
         if ($absence) {
             $data['absence'] = $absence;
+            $data['attendances'] = $attendances;
             $data['attended'] = Attendance::where('user_id', Auth::id())->where('absence_id', $absence->id)->exists();
+            foreach ($data['tasks'] as $key => $task) {
+                $data['tasks'][$key]['submitted'] = $task->submissions->where('user_id', Auth::id())->first() !== null;
+            }
         } else {
             $data['absence'] = $absence;
+            $data['attendances'] = $attendances;
+            foreach ($data['tasks'] as $key => $task) {
+                $data['tasks'][$key]['submitted'] = $task->submissions->where('user_id', Auth::id())->first() !== null;
+            }
         }
 
         return view('student.course.show', $data);
     }
-    
-        public function hasAttended($absenceId)
+
+
+    public function hasAttended($absenceId)
     {
         return Attendance::where('user_id', Auth::id())
             ->where('absence_id', $absenceId)
@@ -261,6 +281,26 @@ class CourseController extends Controller
         $absence->save();
         return redirect()->back();
     }
-    
+
+    public function edit_assigned($id)
+    {
+        return view('admin.users.assign', [
+            'title'=> 'Edit Assigned',
+            'user'=> User::find($id),
+            'courses' => Course::all()
+        ]);
+    }
+
+    public function assign_courses(Request $request, $id)
+    {
+        $user = User::find($id);
+        $courseIds = $request->input('course_ids');
+
+        if ($user) {
+            $user->courses()->sync($courseIds);
+        }
+        return redirect()->route('users.index');
+    }
+
 
 }

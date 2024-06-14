@@ -21,6 +21,9 @@
                         <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
                     </svg>
                 </a>
+                <a href="{{ route('password.request') }}" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Password"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                  </svg></a>
             </div>
         </div>
         <div>
@@ -52,7 +55,7 @@
                                     <td></td>
                                     <td>{{ $user->institute }}</td>
                                     <td>{{ $user->email }}</td>
-                                    
+
                                     <td>
                                         <div class="btn-group dropstart">
                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,6 +65,13 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                    <a href="{{ route('edit_user_courses', $user->id) }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Assign Course">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/>
+                                                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                                                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                                                        </svg>
+                                                    </a>
                                                     <a class="btn btn-primary" href="{{ route('users.show', $user->id ) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail User">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person" viewBox="0 0 16 16">
                                                             <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
@@ -91,14 +101,6 @@
                                                 </form>
                                             </ul>
                                           </div>
-                                            {{-- @if ($user->hasRole('student'))
-                                                <a class="btn btn-secondary" href="{{ route('admin_assignTrainer_users', ['id' => $user->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Assign Trainer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                                                    <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
-                                                </svg></a>  
-                                            @else
-                                            
-                                            @endif --}}
                                     </td>
                                     <td></td>
                                 </tr>
@@ -149,41 +151,9 @@
     </div>
   </div>
 </div>
+
 @endsection
-    
 
-{{--
-@section('scripts')
-<script>
-$(document).ready(function() {
 
-    $('#select_all_ids').click(function(){
-        $('.checkbox_ids').prop('checked', $(this).prop('checked'));
-    });
 
-    $('#addCourseToSelectedUsers').click(function(e){
-        e.preventDefault();
-        let user_ids = [];
-        $('input.checkbox_ids:checked').each(function(){
-            user_ids.push($(this).data('id'));
-        });
-
-        $('#user_ids').val(user_ids.join(','));
-
-        if (user_ids.length > 0) {
-            $('#addCourseForm').submit();
-        }
-    });
-
-    $('.checkbox_ids').change(function() {
-        if ($('.checkbox_ids:checked').length > 0) {
-            $('#addCourseModal').removeClass('disabled');
-        } else {
-            $('#addCourseModal').addClass('disabled');
-        }
-    });
-});
-
-</script>
-@endsection --}}
 

@@ -36,7 +36,19 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                            <div class="gridarea__wraper">
+                                <div class="gridarea__content">
+                                    <div class="gridarea__heading">
+                                        <h3>Tasks List</h3>
+                                    </div>
+                                    <div class="gridarea__price green__color">
+                                        More Information! <br> <br>
+                                        <a href="{{ route('admin_tasks_course', $course->id) }}" class="btn btn-success">Click Here!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

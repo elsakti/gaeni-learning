@@ -11,10 +11,10 @@
                     <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
                     <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
                   </svg>
-            </button>            
+            </button>
             <h4>GEMA LMS - {{ $course->name }} - {{ $course->absences->count() }} ABSENCES</h4>
         </div>
-        
+
         <div class="row">
             <div class="row">
                 <div class="col-xl-12">
@@ -42,16 +42,16 @@
                                         <form action="{{ route('admin_delete_absence', $absence->id) }}" method="POST">
                                             <a href="{{ route('admin_attends_absence', $absence->id) }}" class="btn btn-secondary">DETAIL</a>
 
-                                            @if ( $absence->status == true )                                            
-                                            <a href="{{ route('admin_toggle_absence', $absence->id) }}" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Close Absence">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
-                                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-                                                </svg>
+                                            @if ( $absence->status == true )
+                                            <a href="{{ route('admin_toggle_absence', $absence->id) }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Close Absence">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                                                    <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>
+                                                  </svg>
                                             </a>
                                             @elseif ( $absence->status == false )
-                                            <a href="{{ route('admin_toggle_absence', $absence->id) }}" class="btn btn-success " data-bs-toggle="tooltip" data-bs-placement="top" title="Open Absence">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                                <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
+                                            <a href="{{ route('admin_toggle_absence', $absence->id) }}" class="btn btn-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Open Absence">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                                                    <path d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5"/>
                                                 </svg>
                                             </a>
                                             @endif
