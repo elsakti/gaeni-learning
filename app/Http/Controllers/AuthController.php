@@ -27,72 +27,70 @@ class AuthController extends Controller
         ]);
     }
 
+    private function redirectBasedOnRole($user)
+    {
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin_dashboard');
+        } elseif ($user->hasRole('trainer')) {
+            return redirect()->route('trainer_dashboard');
+        } elseif ($user->hasRole('student')) {
+            return redirect()->route('student_dashboard');
+        }
+
+        Auth::logout();
+        return redirect()->route('login_page')->withErrors([
+            'role_error' => 'Your role is not recognized in the system.',
+        ]);
+    }
+
     public function dologin(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-        $remember = $request->has('remember');
+
+        $remember = $request->filled('remember');
+
         if (Auth::attempt($credentials, $remember)) {
-            $user = Auth::user();
             $request->session()->regenerate();
 
-            if ($user->hasRole('admin')) {
-                return redirect()->route('admin_dashboard');
-            } elseif ($user->hasRole('trainer')) {
-                return redirect()->route('trainer_dashboard');
-            } elseif ($user->hasRole('student')) {
-                return redirect()->route('student_dashboard');
-            }
+            $user = Auth::user();
+
+            return $this->redirectBasedOnRole($user);
         }
-        alert()->error('Invalid Input', 'Invalid Input Detected!, try again.');
+
         return back()->withErrors([
-            'error' => 'Invalid Input Detected!, try again.',
-        ])->onlyInput('error');
+            'login_error' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('email'));
     }
 
     public function doregister(Request $request)
     {
         $credentials = $request->validate([
             'name' => 'required',
+            'head' => 'required',
+            'number' => 'required|unique:users,number',
             'institute' => 'required',
             'phone' => 'required|unique:users',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:8|confirmed'
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:8|confirmed',
         ]);
-        if ($request->password_confirmation != $request->password) {
-            return back()
-                ->withErrors([
-                    'password' => 'Password With Confirm Password did not match!',
-                ]);
-        }
-        if (User::where('email', $credentials['email'])->exists()) {
-            return back()
-                ->withErrors([
-                    'email' => 'Email Already used by another user, please use another Email.',
-                ])->onlyInput('email');
-        }
-        if (User::where('phone', $credentials['phone'])->exists()) {
-            return back()
-                ->withErrors([
-                    'phone' => 'Phone Number Already used by another user, please use another Phone Number.',
-                ])->onlyInput('phone');
-        }
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'institute' => $request->institute,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password)
+            'name' => Str::upper($credentials['name']),
+            'head' => Str::upper($credentials['head']),
+            'number' => $credentials['number'],
+            'email' => $credentials['email'],
+            'institute' => Str::upper($credentials['institute']),
+            'phone' => $credentials['phone'],
+            'password' => Hash::make($credentials['password']),
         ]);
-        // dd($user);
-        if (Auth::attempt(['password' => $request->password, 'email' => $user->email])) {
-            $user->assignRole('student');
-            toast('Account Has Been Registered!, Welcome' . $request->name, 'success');
-            $request->session()->regenerate();
-            return redirect()->route('login_page')->with('email', $request->email);
-        }
+
+        Auth::login($user);
+        $user->assignRole('student');
+        toast('Account Has Been Registered!, Welcome ' . $credentials['name'], 'success');
+        return redirect()->route('student_dashboard');
     }
 
     public function logout(Request $request): RedirectResponse

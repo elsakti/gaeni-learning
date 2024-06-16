@@ -25,8 +25,8 @@
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <div class="login__form">
-                                    <label class="form__label">Name</label>
-                                    <input class="common__login__input @error('name') is-invalid @enderror" name="name" id="name" type="text" placeholder="Name" required autocomplete="name" value="{{ session('name') }}" autofocus>
+                                    <label class="form__label">Full Name</label>
+                                    <input class="common__login__input @error('name') is-invalid @enderror" name="name" id="name" type="text" placeholder="Your full name" required autocomplete="name" value="{{ session('name') }}" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -34,8 +34,17 @@
                                     @enderror
                                 </div>
                                 <div class="login__form">
-                                    <label class="form__label">Institute</label>
-                                    <input class="common__login__input @error('institute') is-invalid @enderror" name="institute" id="institute" type="text" placeholder="Institute" required autocomplete="institute" value="{{ session('institute') }}" autofocus>
+                                    <label class="form__label">NISN/NRP/NIM</label>
+                                    <input class="common__login__input @error('number') is-invalid @enderror" name="number" id="number" type="number" placeholder="Your NISN/NRP/NIM " required autocomplete="number" value="{{ session('number') }}" autofocus>
+                                    @error('number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="login__form">
+                                    <label class="form__label">Institute/School</label>
+                                    <input class="common__login__input @error('institute') is-invalid @enderror" name="institute" id="institute" type="text" placeholder="Your institute or school of origin" required autocomplete="institute" value="{{ session('institute') }}" autofocus>
                                     @error('institute')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,8 +52,17 @@
                                     @enderror
                                 </div>
                                 <div class="login__form">
-                                    <label class="form__label">Phone</label>
-                                    <input class="common__login__input @error('phone') is-invalid @enderror" name="phone" id="phone" type="number" placeholder="Phone example: 08123456789" autocomplete="phone" value="{{ session('') }}" autofocus required>
+                                    <label class="form__label">Major</label>
+                                    <input class="common__login__input @error('head') is-invalid @enderror" name="head" id="head" type="text" placeholder="Your Major or study program" required autocomplete="head" value="{{ session('head') }}" autofocus>
+                                    @error('head')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="login__form">
+                                    <label class="form__label">Phone Number</label>
+                                    <input class="common__login__input @error('phone') is-invalid @enderror" name="phone" id="phone" type="number" placeholder="Phone example: 08123456789" autocomplete="phone" value="{{ session('phone') }}" autofocus required>
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -83,9 +101,6 @@
                                         <input id="accepted" type="checkbox" required>
                                         <label for="accepted"> I am ready to be responsible for all the data that I fill in. <br><span style="color: red">*Saya siap bertanggung jawab atas semua data pribadi yang saya isi.</span></label>
                                     </div>
-                                    {{-- <div class="text-end login__form__link">
-                                        <a href="#">Forgot your password?</a>
-                                    </div> --}}
                                 </div>
                                 <div class="login__button" style="justify-content: center">
                                     <button class="default__button">REGISTER</button>
