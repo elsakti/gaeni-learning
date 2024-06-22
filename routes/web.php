@@ -10,6 +10,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/{name}/detail', [HomeController::class, 'detail'])->name('detail_course');
 
@@ -108,6 +109,7 @@ Route::group(['middleware' => ['role:trainer']], function () {
 Route::group(['middleware' => ['role:student']], function () {
     Route::get('/student/dashboard', [DashboardController::class, 'student'])->name('student_dashboard');
     Route::get('/student/dashboard/{id}/absences', [CourseController::class, 'student_detail_course'])->name('student_detail_courses');
+    Route::get('/student/dashboard/profile',[DashboardController::class, 'student_profile'])->name('student_profile');
 
     Route::post('/student-attend', [AbsenceController::class, 'attend'])->name('student_attend');
     Route::post('/student-submit', [TaskController::class, 'submission'])->name('student_submit');
